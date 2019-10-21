@@ -1,0 +1,40 @@
+{
+  "name": "@b3gm/algebr4",
+  "version": "0.0.1",
+  "description": "Linear algebra objects for up to 4 dimensions",
+  "main": "./dist/algebr4.bundle.js",
+  "types": "./dist/algebr4.bundle.d.ts",
+  "scripts": {
+    "test": "npx jest",
+    "build": "npx tsc && npx browserify dist/algebr4.js -o dist/algebr4.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b3gm/algebr4.git"
+  },
+  "author": "b3gm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/b3gm/algebr4/issues"
+  },
+  "homepage": "https://github.com/b3gm/algebr4#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "browserify": "^16.5.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "tsx"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": ".*\\.test\\.(ts)$",
+    "collectCoverage": true
+  }
+}
