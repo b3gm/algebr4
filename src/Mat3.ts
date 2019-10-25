@@ -38,7 +38,7 @@ export default class Mat3 implements WMat3 {
         );
     }
     
-    public static axisAngleRotation(axis:LVec3, angle:number) {
+    public static axisAngleRotationUnsafe(axis:LVec3, angle:number) {
         const ux = axis.x;
         const uy = axis.y;
         const uz = axis.z;

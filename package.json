@@ -6,7 +6,8 @@
   "types": "./dist/algebr4.bundle.d.ts",
   "scripts": {
     "test": "npx jest",
-    "build": "npx tsc && npx browserify dist/algebr4.js -o dist/algebr4.bundle.js"
+    "build": "npx tsc && npx browserify dist/algebr4.js -o dist/algebr4.bundle.js",
+    "prepublishOnly": "npm run-script build && npm test"
   },
   "repository": {
     "type": "git",

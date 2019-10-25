@@ -1,6 +1,7 @@
 import Quaternion from '../Quaternion';
 import Vec3 from '../Vec3';
 import RVec3 from '../RVec3';
+import Mat3 from '../Mat3';
 import 'jest';
 
 const TOL = 1.0e-6;
@@ -133,7 +134,54 @@ describe(Quaternion, () => {
         );
         arr = [1, 2, 3, 4];
         expect(Quaternion.fromFlatArray(arr))['equals'](testQ());
-    })
+    });
+    
+    it('should create quaternions from rotation matrices', () => {
+        expect(
+            Quaternion.fromRotationMatrixUnsafe(
+                Mat3.fromFlatArray([
+                    0, -1, 0,
+                    1, 0, 0,
+                    0, 0, 1
+                ])
+            )
+        )['equals'](
+            new Quaternion(Math.cos(Math.PI/4), 0, 0, Math.sin(Math.PI/4))
+        );
+        expect(
+            Quaternion.fromRotationMatrixUnsafe(
+                Mat3.fromFlatArray([
+                    1, 0, 0,
+                    0, -1, 0,
+                    0, 0, -1
+                ])
+            )
+        )['equals'](
+            new Quaternion(Math.cos(Math.PI/2), Math.sin(Math.PI/2), 0, 0)
+        );
+        expect(
+            Quaternion.fromRotationMatrixUnsafe(
+                Mat3.fromFlatArray([
+                    -1, 0, 0,
+                    0, 1, 0,
+                    0, 0, -1
+                ])
+            )
+        )['equals'](
+            new Quaternion(Math.cos(Math.PI/2), 0, Math.sin(Math.PI/2), 0)
+        );
+        expect(
+            Quaternion.fromRotationMatrixUnsafe(
+                Mat3.fromFlatArray([
+                    -1, 0, 0,
+                    0, -1, 0,
+                    0, 0, 1
+                ])
+            )
+        )['equals'](
+            new Quaternion(Math.cos(Math.PI/2), 0, 0, Math.sin(Math.PI/2))
+        );
+    });
 });
 
 function testQ() {

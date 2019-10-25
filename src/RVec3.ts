@@ -33,11 +33,11 @@ export default interface RVec3 extends LVec3 {
     
     turnDeg(axis:RVec3, angle:number):RVec3;
     
-    angleUnsafe(vec:LVec3, positive:boolean):number;
+    angleUnsafe(vec:LVec3):number;
 
     angleUnsafe(vec:LVec3):number;
     
-    angle(vec:LVec3, positive:boolean):number;
+    angle(vec:LVec3):number;
     
     angle(vec:LVec3):number;
     

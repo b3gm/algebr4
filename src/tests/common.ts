@@ -38,14 +38,6 @@ export function rowTimesColumn4(): Mat4 {
     );
 }
 
-export function rowTimesColumn3(): Mat3 {
-    return new Mat3(
-        1, 2, 3,
-        2, 4, 6,
-        3, 6, 9
-    );
-}
-
 export function rowTimesColumn2(): Mat2 {
     return new Mat2(
         1, 2,
@@ -77,50 +69,11 @@ export function incrementing2(): Mat2 {
     );
 }
 
-export function alternating4(): Mat4 {
-    return new Mat4(
-        1, -1, 1, -1,
-        -1, 1, -1, 1,
-        1, -1, 1, -1,
-        -1, 1, -1, 1
-    );
-}
-
-export function alternating3(): Mat3 {
-    return new Mat3(
-        1, -1, 1,
-        -1, 1, -1,
-        1, -1, 1
-    );
-}
-
-export function alternating2(): Mat2 {
-    return new Mat2(
-        1, -1,
-        -1, 1
-    );
-}
-
 export function array4():Array<Array<number>> {
     return [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
-    ]
-}
-
-export function array3():Array<Array<number>> {
-    return [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ]
-}
-
-export function array2():Array<Array<number>> {
-    return [
-        [0, 0],
-        [0, 0]
     ]
 }

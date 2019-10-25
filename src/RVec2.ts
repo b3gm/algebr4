@@ -26,11 +26,11 @@ export default interface RVec2 extends LVec2 {
     
     turnDeg(angle:number):RVec2;
     
-    angleUnsafe(vec:LVec2, positive:boolean):number;
+    angleUnsafe(vec:LVec2):number;
 
     angleUnsafe(vec:LVec2):number;
     
-    angle(vec:LVec2, positive:boolean):number;
+    angle(vec:LVec2):number;
 
     angle(vec:LVec2):number;
     

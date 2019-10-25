@@ -20,6 +20,15 @@ describe(Vec2, () => {
         }
     });
     
+    it('should dot product vectors', () => {
+        expect(new Vec2(2, 0).dot(new Vec2(0, 1))).toBe(0);
+    });
+    
+    it('should cross product vectors', () => {
+        expect(new Vec2(1, 0).cross(new Vec2(0, 1))).toBe(1);
+        expect(new Vec2(1, -5).cross(new Vec2(1, -5))).toBe(0);
+    });
+    
     it('should add vectors', () => {
         const a = testVec();
         const b = testVec2();
@@ -121,4 +130,51 @@ describe(Vec2, () => {
     it('should import literals', () => {
         expect(Vec2.fromLiteral(testVec())).toMatchObject(testVec());
     });
+    
+    it('should turn itself', () => {
+        expect(
+            new Vec2(0, 1).turnDeg(90)
+        )['matchesVector'](new Vec2(-1, 0));
+        expect(
+            new Vec2(1, 0).turnDeg(90)
+        )['matchesVector'](new Vec2(0, 1));
+    });
+    
+    it('should turn itself unsafely', () => {
+        expect(
+            new Vec2(0, 1).turnDegSelf(90)
+        )['matchesVector'](new Vec2(-1, 0));
+        expect(
+            new Vec2(1, 0).turnDegSelf(90)
+        )['matchesVector'](new Vec2(0, 1));
+    });
+    
+    it('should calculate the angle between vectors', () => {
+        expect(new Vec2(-1, 0).angle(new Vec2(1, 0.1)))
+            .toBeCloseTo(Math.PI * 0.968275, 5);
+        expect(new Vec2(-1, 0).angle(new Vec2(1, -0.1)))
+            .toBeCloseTo(Math.PI * 0.968275, 5);
+    });
 });
+
+expect.extend({
+    'matchesVector': (received: Vec2, expected:Vec2, ...actual:any[]) => {
+        const passX = Math.abs(expected.x - received.x) < 1.0e-6;
+        const passY = Math.abs(expected.y - received.y) < 1.0e-6;
+        
+        if(passX && passY) {
+            return {
+                pass: true,
+                message: () => `Expected ${toString(received)} to differ at most by 1.0e-6 in any component from ${toString(expected)}.`
+            };
+        }
+        return {
+            pass: false,
+            message: () => `Expected ${toString(received)} to differ by more than 1.0e-6 in any component from ${toString(expected)}.`
+        };
+    }
+});
+
+function toString(obj:any) {
+    return JSON.stringify(obj);
+}

@@ -27,7 +27,7 @@ export default class Vec3 implements WVec3 {
         return new Vec3(
             this.y * vec.z - this.z * vec.y,
             this.z * vec.x - this.x * vec.z,
-            this.y * vec.x - this.x * vec.y
+            this.x * vec.y - this.y * vec.x
         );
     }
     
@@ -139,21 +139,27 @@ export default class Vec3 implements WVec3 {
             + y * (cosA + uy * uy * oneMcosA)
             + z * (uy * uz * oneMcosA - ux * sinA);
         this.z = x * (uz * ux * oneMcosA - uy * sinA)
-            + y * (uz * uy * oneMcosA - ux * sinA)
+            + y * (uz * uy * oneMcosA + ux * sinA)
             + z * (cosA + uz * uz * oneMcosA);
         return this;
     }
     
     public turnRadSelf(axis:LVec3, angle:number):Vec3 {
-        return this.turnRadUnsafe(Vec3.fromLiteral(axis).normalizeSelf(), angle);
+        return this.turnRadUnsafeSelf(
+            Vec3.fromLiteral(axis).normalizeSelf(),
+            angle
+        );
     }
     
     public turnDegUnsafe(axis:LVec3, angle:number):Vec3 {
-        return this.turnRadUnsafe(Vec3.fromLiteral(axis), angle * DEG2RAD);
+        return this.turnRadUnsafe(axis, angle * DEG2RAD);
     }
     
     public turnDeg(axis:LVec3, angle:number):Vec3 {
-        return this.turnRad(Vec3.fromLiteral(axis).normalizeSelf(), angle * DEG2RAD);
+        return this.turnRad(
+            Vec3.fromLiteral(axis).normalizeSelf(),
+            angle * DEG2RAD
+        );
     }
     
     public turnDegUnsafeSelf(axis: LVec3, angle:number):Vec3 {
@@ -161,17 +167,19 @@ export default class Vec3 implements WVec3 {
     }
     
     public turnDegSelf(axis:LVec3, angle:number):Vec3 {
-        return this.turnRadSelf(Vec3.fromLiteral(axis).normalizeSelf(), angle);
+        return this.turnRadSelf(
+            Vec3.fromLiteral(axis).normalizeSelf(),
+            angle * DEG2RAD
+        );
     }
     
-    public angleUnsafe(vec:LVec3, positive:boolean = true) {
-        return Math.asin(this.cross(vec).norm());
+    public angleUnsafe(vec:LVec3) {
+        return Math.acos(this.dot(vec));
     }
     
-    public angle(vec:LVec3, positive:boolean = true) {
+    public angle(vec:LVec3) {
         return this.normalize().angleUnsafe(
-            Vec3.fromLiteral(vec).normalizeSelf(),
-            positive
+            Vec3.fromLiteral(vec).normalizeSelf()
         );
     }
     

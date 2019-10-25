@@ -59,10 +59,22 @@ describe(Vec3, () => {
     
     it('should calculate the norm', () => {
         expect(testVec().norm()).toBe(Math.sqrt(14));
-    })
+    });
     
     it('should dot product vectors', () => {
         expect(testVec().dot(testVec())).toBe(testVec().normSquare());
+    });
+    
+    it('should cross multiply vector', () => {
+        expect(new Vec3(1, 0, 0).cross(new Vec3(0, 1, 0)))['matchesVector'](
+            new Vec3(0, 0, 1)
+        );
+        expect(new Vec3(0, 1, 0).cross(new Vec3(0, 0, 1)))['matchesVector'](
+            new Vec3(1, 0, 0)
+        );
+        expect(new Vec3(0, 0, 1).cross(new Vec3(1, 0, 0)))['matchesVector'](
+            new Vec3(0, 1, 0)
+        );
     });
     
     it('should scalar multiply', () => {
@@ -134,6 +146,49 @@ describe(Vec3, () => {
         expect(
             new Vec3(0, 0, 1).turnDeg(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
+    });
+    
+    it('should turn vectors unsafely', () => {
+        expect(
+            new Vec3(0, 1, 0).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, 0, 1));
+        expect(
+            new Vec3(1, 0, 0).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(1, 0, 0));
+        expect(
+            new Vec3(0, 0, 1).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, -1, 0));
+    });
+    
+    it('should turn itself', () => {
+        expect(
+            new Vec3(0, 1, 0).turnDegSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, 0, 1));
+        expect(
+            new Vec3(1, 0, 0).turnDegSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(1, 0, 0));
+        expect(
+            new Vec3(0, 0, 1).turnDegSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, -1, 0));
+    });
+    
+    it('should turn itself unsafely', () => {
+        expect(
+            new Vec3(0, 1, 0).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, 0, 1));
+        expect(
+            new Vec3(1, 0, 0).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(1, 0, 0));
+        expect(
+            new Vec3(0, 0, 1).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+        )['matchesVector'](new Vec3(0, -1, 0));
+    });
+    
+    it('should calculate the angle between vectors', () => {
+        expect(new Vec3(-1, 0, 0).angle(new Vec3(1, 0.1, 0)))
+            .toBeCloseTo(Math.PI * 0.968275, 5);
+        expect(new Vec3(-1, 0, 0).angle(new Vec3(1, -0.1, 0)))
+            .toBeCloseTo(Math.PI * 0.968275, 5);
     });
 });
     

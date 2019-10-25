@@ -1,6 +1,6 @@
 import LVec2 from './LVec2';
 import WVec2 from './WVec2';
-import {PI, PI2, DEG2RAD} from './constants';
+import {DEG2RAD} from './constants';
 
 export default class Vec2 implements WVec2 {
     
@@ -109,23 +109,13 @@ export default class Vec2 implements WVec2 {
         return this.turnRadSelf(angle * DEG2RAD);
     }
     
-    public angleUnsafe(vec:LVec2, positive:boolean = true) {
-        let sin = this.cross(vec);
-        let cos = this.dot(vec);
-        let ang = Math.asin(sin);
-        if (cos < 0) {
-            ang = (sin > 0 ? PI : - PI) - ang;
-        }
-        if(positive && ang < 0) {
-            ang += PI2;
-        }
-        return ang;
+    public angleUnsafe(vec:LVec2) {
+        return Math.acos(this.dot(vec));
     }
     
-    public angle(vec:LVec2, positive:boolean = true) {
+    public angle(vec:LVec2) {
         return this.normalize().angleUnsafe(
-            Vec2.fromLiteral(vec).normalizeSelf(),
-            positive
+            Vec2.fromLiteral(vec).normalizeSelf()
         );
     }
     

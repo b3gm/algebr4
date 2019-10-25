@@ -3,6 +3,8 @@ import Vec3 from '../Vec3';
 import 'jest';
 import * as c from './common';
 
+const TOL:number = 1.0e-6;
+
 describe('Mat3', () => {
     it('should correctly invert', () => {
         const mat:Mat3 = c.testMat3();
@@ -199,9 +201,10 @@ describe('Mat3', () => {
     });
     
     it('should correctly import column major arrays', () => {
-        const result = Mat3.fromColumnMajorArray(c.incrementing3().toColumnMajorArray());
+        const result = Mat3.fromColumnMajorArray(
+            c.incrementing3().toColumnMajorArray()
+        );
         expect(result.equals(c.incrementing3())).toBe(true);
-        
     });
     
     it('should correctly compare matrices', () => {
@@ -238,4 +241,49 @@ describe('Mat3', () => {
         }
     });
     
+    it('should create rotation matrices from axis angle parameters', () => {
+        expect(Mat3.axisAngleRotationUnsafe(new Vec3(1, 0, 0), Math.PI / 2))
+            ['equals'](
+                new Mat3(
+                    1, 0, 0,
+                    0, 0, -1,
+                    0, 1, 0
+                )
+            );
+        expect(Mat3.axisAngleRotationUnsafe(new Vec3(0, 1, 0), Math.PI / 2))
+            ['equals'](
+                new Mat3(
+                    0, 0, 1,
+                    0, 1, 0,
+                    -1, 0, 0
+                )
+            );
+        expect(Mat3.axisAngleRotationUnsafe(new Vec3(0, 0, 1), Math.PI / 2))
+            ['equals'](
+                new Mat3(
+                    0, -1, 0,
+                    1, 0, 0,
+                    0, 0, 1
+                )
+            );
+    });
 });
+
+
+expect.extend({
+    equals: (received: Mat3, expected: Mat3, args:any[]) => {
+        let matches = true;
+        for (let k in ['xx', 'xy', 'xz', 'yx', 'yy', 'yz', 'zx', 'zy', 'zz']) {
+            matches = matches && (received[k] === expected[k]);
+        }
+        
+        return {
+            pass: matches,
+            message: () => `Expected ${toString(received)} to differ no more than ${TOL} from ${toString(expected)}.`
+        };
+    }
+});
+
+function toString(obj:any) {
+    return JSON.stringify(obj);
+}
