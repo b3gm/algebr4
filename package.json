@@ -12,7 +12,7 @@
     "build:module": "npx tsc -p tsconfig.module.json",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --ext .ts --fix",
-    "clean": "rm -r dist",
+    "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npx run lint && npm run build && npm test"
   },
   "repository": {
