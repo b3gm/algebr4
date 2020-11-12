@@ -1,26 +1,26 @@
-import LMat3 from './LMat3';
-import WMat3 from './WMat3';
-import LVec3 from './LVec3';
-import Vec3 from './Vec3';
+import { LMat3 } from './LMat3';
+import { WMat3 } from './WMat3';
+import { LVec3 } from './LVec3';
+import { Vec3 } from './Vec3';
 
 const sin = Math.sin;
 const cos = Math.cos;
 
-export default class Mat3 implements WMat3 {
-    
-    public static fromLiteral(m:LMat3):Mat3 {
+export class Mat3 implements WMat3 {
+
+    public static fromLiteral(m: LMat3): Mat3 {
         return new Mat3(m.xx, m.xy, m.xz, m.yx, m.yy, m.yz, m.zx, m.zy, m.zz);
     }
-    
-    public static fromFlatArray(e:Array<number>):Mat3 {
+
+    public static fromFlatArray(e: Array<number>): Mat3 {
         return new Mat3(
             e[0], e[1], e[2],
             e[3], e[4], e[5],
             e[6], e[7], e[8]
         );
     }
-    
-    public static fromRowMajorArray(e:Array<Array<number>>):Mat3 {
+
+    public static fromRowMajorArray(e: Array<Array<number>>): Mat3 {
         const r1 = e[0] || [], r2 = e[1] || [], r3 = e[2] || [];
         return new Mat3(
             r1[0] || 0, r1[1] || 0, r1[2] || 0,
@@ -28,8 +28,8 @@ export default class Mat3 implements WMat3 {
             r3[0] || 0, r3[1] || 0, r3[2] || 0,
         );
     }
-    
-    public static fromColumnMajorArray(e:Array<Array<number>>):Mat3 {
+
+    public static fromColumnMajorArray(e: Array<Array<number>>): Mat3 {
         const c1 = e[0] || [], c2 = e[1] || [], c3 = e[2] || [];
         return new Mat3(
             c1[0] || 0, c2[0] || 0, c3[0] || 0,
@@ -37,8 +37,8 @@ export default class Mat3 implements WMat3 {
             c1[2] || 0, c2[2] || 0, c3[2] || 0,
         );
     }
-    
-    public static axisAngleRotationUnsafe(axis:LVec3, angle:number) {
+
+    public static axisAngleRotationUnsafe(axis: LVec3, angle: number): Mat3 {
         const ux = axis.x;
         const uy = axis.y;
         const uz = axis.z;
@@ -57,7 +57,7 @@ export default class Mat3 implements WMat3 {
             cosA + uz * uz * oneMcosA
         );
     }
-    
+
     constructor(
         public xx: number,
         public xy: number,
@@ -70,7 +70,7 @@ export default class Mat3 implements WMat3 {
         public zz: number
     ) {
     }
-    
+
     toFlatArray(): number[] {
         return [
             this.xx, this.xy, this.xz,
@@ -78,7 +78,7 @@ export default class Mat3 implements WMat3 {
             this.zx, this.zy, this.zz
         ]
     }
-    
+
     toRowMajorArray(): Array<Array<number>> {
         return [
             [this.xx, this.xy, this.xz],
@@ -86,15 +86,15 @@ export default class Mat3 implements WMat3 {
             [this.zx, this.zy, this.zz]
         ]
     }
-    
-    toColumnMajorArray(): Array<Array<number>>  {
+
+    toColumnMajorArray(): Array<Array<number>> {
         return [
             [this.xx, this.yx, this.zx],
             [this.xy, this.yy, this.zy],
             [this.xz, this.yz, this.zz]
         ]
     }
-    
+
     add(m: LMat3): Mat3 {
         return new Mat3(
             this.xx + m.xx, this.xy + m.xy, this.xz + m.xz,
@@ -102,7 +102,7 @@ export default class Mat3 implements WMat3 {
             this.zx + m.zx, this.zy + m.zy, this.zz + m.zz
         );
     }
-    
+
     addSelf(m: LMat3): Mat3 {
         this.xx += m.xx;
         this.xy += m.xy;
@@ -115,7 +115,7 @@ export default class Mat3 implements WMat3 {
         this.zz += m.zz;
         return this;
     }
-    
+
     subtract(m: LMat3): Mat3 {
         return new Mat3(
             this.xx - m.xx, this.xy - m.xy, this.xz - m.xz,
@@ -123,7 +123,7 @@ export default class Mat3 implements WMat3 {
             this.zx - m.zx, this.zy - m.zy, this.zz - m.zz
         );
     }
-    
+
     subtractSelf(m: LMat3): Mat3 {
         this.xx -= m.xx;
         this.xy -= m.xy;
@@ -136,7 +136,7 @@ export default class Mat3 implements WMat3 {
         this.zz -= m.zz;
         return this;
     }
-    
+
     multiply(m: LMat3): Mat3 {
         const xx = this.xx, xy = this.xy, xz = this.xz,
             yx = this.yx, yy = this.yy, yz = this.yz,
@@ -148,7 +148,7 @@ export default class Mat3 implements WMat3 {
             xx * oxx + xy * oyx + xz * ozx,
             xx * oxy + xy * oyy + xz * ozy,
             xx * oxz + xy * oyz + xz * ozz,
-            yx * oxx + yy * oyx + yz * ozx, 
+            yx * oxx + yy * oyx + yz * ozx,
             yx * oxy + yy * oyy + yz * ozy,
             yx * oxz + yy * oyz + yz * ozz,
             zx * oxx + zy * oyx + zz * ozx,
@@ -156,7 +156,7 @@ export default class Mat3 implements WMat3 {
             zx * oxz + zy * oyz + zz * ozz
         );
     }
-    
+
     scalarMultiply(f: number): Mat3 {
         return new Mat3(
             f * this.xx, f * this.xy, f * this.xz,
@@ -164,7 +164,7 @@ export default class Mat3 implements WMat3 {
             f * this.zx, f * this.zy, f * this.zz
         );
     }
-    
+
     scalarMultiplySelf(f: number): Mat3 {
         this.xx *= f;
         this.xy *= f;
@@ -177,7 +177,7 @@ export default class Mat3 implements WMat3 {
         this.zz *= f;
         return this;
     }
-    
+
     det(): number {
         const xx = this.xx, xy = this.xy, xz = this.xz,
             yx = this.yx, yy = this.yy, yz = this.yz,
@@ -186,7 +186,7 @@ export default class Mat3 implements WMat3 {
             - xy * (yx * zz - zx * yz)
             + xz * (yx * zy - zx * yy);
     }
-    
+
     invert(): Mat3 {
         const xx = this.xx, xy = this.xy, xz = this.xz,
             yx = this.yx, yy = this.yy, yz = this.yz,
@@ -195,7 +195,7 @@ export default class Mat3 implements WMat3 {
             t2 = yx * zz - zx * yz,
             t3 = yx * zy - zx * yy;
         const detInv = 1 / (xx * t1 - xy * t2 + xz * t3);
-        
+
         return new Mat3(
             detInv * t1,
             - detInv * (xy * zz - zy * xz),
@@ -208,7 +208,7 @@ export default class Mat3 implements WMat3 {
             detInv * (xx * yy - yx * xy)
         );
     }
-    
+
     invertSelf(): Mat3 {
         const xx = this.xx, xy = this.xy, xz = this.xz,
             yx = this.yx, yy = this.yy, yz = this.yz,
@@ -217,7 +217,7 @@ export default class Mat3 implements WMat3 {
             t2 = yx * zz - zx * yz,
             t3 = yx * zy - zx * yy;
         const detInv = 1 / (xx * t1 - xy * t2 + xz * t3);
-        
+
         this.xx = detInv * t1;
         this.xy = - detInv * (xy * zz - zy * xz);
         this.xz = detInv * (xy * yz - yy * xz);
@@ -229,7 +229,7 @@ export default class Mat3 implements WMat3 {
         this.zz = detInv * (xx * yy - yx * xy);
         return this;
     }
-    
+
     multiplyVec(v: LVec3): Vec3 {
         const vx = v.x, vy = v.y, vz = v.z;
         return new Vec3(
@@ -238,7 +238,7 @@ export default class Mat3 implements WMat3 {
             this.zx * vx + this.zy * vy + this.zz * vz
         );
     }
-    
+
     vecMultiply(v: LVec3): Vec3 {
         const vx = v.x, vy = v.y, vz = v.z;
         return new Vec3(
@@ -247,7 +247,7 @@ export default class Mat3 implements WMat3 {
             this.xz * vx + this.yz * vy + this.zz * vz
         );
     }
-    
+
     transpose(): Mat3 {
         return new Mat3(
             this.xx, this.yx, this.zx,
@@ -255,7 +255,7 @@ export default class Mat3 implements WMat3 {
             this.xz, this.yz, this.zz
         );
     }
-    
+
     transposeSelf(): Mat3 {
         const xy = this.xy, xz = this.xz, yz = this.yz;
         this.xy = this.yx;
@@ -266,17 +266,17 @@ export default class Mat3 implements WMat3 {
         this.zx = xz;
         return this;
     }
-    
-    copy():Mat3 {
+
+    copy(): Mat3 {
         return new Mat3(
             this.xx, this.xy, this.xz,
             this.yx, this.yy, this.yz,
             this.zx, this.zy, this.zz
         );
     }
-    
-    equals(o:Mat3, tolerance:number = 0):boolean {
-        if(tolerance > 0) {
+
+    equals(o: Mat3, tolerance: number = 0): boolean {
+        if (tolerance > 0) {
             return Math.abs(this.xx - o.xx) < tolerance
                 && Math.abs(this.xy - o.xy) < tolerance
                 && Math.abs(this.xz - o.xz) < tolerance

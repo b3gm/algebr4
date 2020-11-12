@@ -1,11 +1,11 @@
-import LMat4 from './LMat4';
-import WMat4 from './WMat4';
-import LVec4 from './LVec4';
-import Vec4 from './Vec4';
+import { LMat4 } from './LMat4';
+import { WMat4 } from './WMat4';
+import { LVec4 } from './LVec4';
+import { Vec4 } from './Vec4';
 
-export default class Mat4 implements WMat4 {
-    
-    public static fromLiteral(m:LMat4):Mat4 {
+export class Mat4 implements WMat4 {
+
+    public static fromLiteral(m: LMat4): Mat4 {
         return new Mat4(
             m.xx, m.xy, m.xz, m.xw,
             m.yx, m.yy, m.yz, m.yw,
@@ -13,8 +13,8 @@ export default class Mat4 implements WMat4 {
             m.wx, m.wy, m.wz, m.ww
         );
     }
-    
-    public static fromFlatArray(e:Array<number>):Mat4 {
+
+    public static fromFlatArray(e: Array<number>): Mat4 {
         return new Mat4(
             e[0], e[1], e[2], e[3],
             e[4], e[5], e[6], e[7],
@@ -22,8 +22,8 @@ export default class Mat4 implements WMat4 {
             e[12], e[13], e[14], e[15]
         );
     }
-    
-    public static fromRowMajorArray(e:Array<Array<number>>):Mat4 {
+
+    public static fromRowMajorArray(e: Array<Array<number>>): Mat4 {
         const r1 = e[0] || [], r2 = e[1] || [], r3 = e[2] || [], r4 = e[3] || [];
         return new Mat4(
             r1[0] || 0, r1[1] || 0, r1[2] || 0, r1[3] || 0,
@@ -32,17 +32,17 @@ export default class Mat4 implements WMat4 {
             r4[0] || 0, r4[1] || 0, r4[2] || 0, r4[3] || 0
         );
     }
-    
-    public static fromColumnMajorArray(e:Array<Array<number>>):Mat4 {
+
+    public static fromColumnMajorArray(e: Array<Array<number>>): Mat4 {
         const c1 = e[0] || [], c2 = e[1] || [], c3 = e[2] || [], c4 = e[3] || [];
         return new Mat4(
             c1[0] || 0, c2[0] || 0, c3[0] || 0, c4[0] || 0,
-            c1[1] || 0, c2[1] || 0, c3[1] || 0, c4[1] || 0, 
-            c1[2] || 0, c2[2] || 0, c3[2] || 0, c4[2] || 0, 
+            c1[1] || 0, c2[1] || 0, c3[1] || 0, c4[1] || 0,
+            c1[2] || 0, c2[2] || 0, c3[2] || 0, c4[2] || 0,
             c1[3] || 0, c2[3] || 0, c3[3] || 0, c4[3] || 0
         );
     }
-    
+
     constructor(
         public xx: number,
         public xy: number,
@@ -62,7 +62,7 @@ export default class Mat4 implements WMat4 {
         public ww: number
     ) {
     }
-    
+
     toFlatArray(): number[] {
         return [
             this.xx, this.xy, this.xz, this.xw,
@@ -71,7 +71,7 @@ export default class Mat4 implements WMat4 {
             this.wx, this.wy, this.wz, this.ww
         ]
     }
-    
+
     toRowMajorArray(): Array<Array<number>> {
         return [
             [this.xx, this.xy, this.xz, this.xw],
@@ -80,8 +80,8 @@ export default class Mat4 implements WMat4 {
             [this.wx, this.wy, this.wz, this.ww]
         ]
     }
-    
-    toColumnMajorArray(): Array<Array<number>>  {
+
+    toColumnMajorArray(): Array<Array<number>> {
         return [
             [this.xx, this.yx, this.zx, this.wx],
             [this.xy, this.yy, this.zy, this.wy],
@@ -89,7 +89,7 @@ export default class Mat4 implements WMat4 {
             [this.xw, this.yw, this.zw, this.ww]
         ]
     }
-    
+
     add(m: LMat4): Mat4 {
         return new Mat4(
             this.xx + m.xx, this.xy + m.xy, this.xz + m.xz, this.xw + m.xw,
@@ -98,7 +98,7 @@ export default class Mat4 implements WMat4 {
             this.wx + m.wx, this.wy + m.wy, this.wz + m.wz, this.ww + m.ww
         );
     }
-    
+
     addSelf(m: LMat4): Mat4 {
         this.xx += m.xx;
         this.xy += m.xy;
@@ -118,7 +118,7 @@ export default class Mat4 implements WMat4 {
         this.ww += m.ww;
         return this;
     }
-    
+
     subtract(m: LMat4): Mat4 {
         return new Mat4(
             this.xx - m.xx, this.xy - m.xy, this.xz - m.xz, this.xw - m.xw,
@@ -127,7 +127,7 @@ export default class Mat4 implements WMat4 {
             this.wx - m.wx, this.wy - m.wy, this.wz - m.wz, this.ww - m.ww
         );
     }
-    
+
     subtractSelf(m: LMat4): Mat4 {
         this.xx -= m.xx;
         this.xy -= m.xy;
@@ -147,7 +147,7 @@ export default class Mat4 implements WMat4 {
         this.ww -= m.ww;
         return this;
     }
-    
+
     multiply(m: LMat4): Mat4 {
         const xx = this.xx, xy = this.xy, xz = this.xz, xw = this.xw,
             yx = this.yx, yy = this.yy, yz = this.yz, yw = this.yw,
@@ -176,7 +176,7 @@ export default class Mat4 implements WMat4 {
             wx * oxw + wy * oyw + wz * ozw + ww * oww
         );
     }
-    
+
     scalarMultiply(f: number): Mat4 {
         return new Mat4(
             f * this.xx, f * this.xy, f * this.xz, f * this.xw,
@@ -185,7 +185,7 @@ export default class Mat4 implements WMat4 {
             f * this.wx, f * this.wy, f * this.wz, f * this.ww
         );
     }
-    
+
     scalarMultiplySelf(f: number): Mat4 {
         this.xx *= f;
         this.xy *= f;
@@ -205,7 +205,7 @@ export default class Mat4 implements WMat4 {
         this.ww *= f;
         return this;
     }
-    
+
     det(): number {
         const xx = this.xx, xy = this.xy, xz = this.xz, xw = this.xw,
             yx = this.yx, yy = this.yy, yz = this.yz, yw = this.yw,
@@ -217,7 +217,7 @@ export default class Mat4 implements WMat4 {
             t4 = yx * (zy * wz - wy * zz) + yy * (zz * wx - wz * zx) + yz * (zx * wy - wx * zy);
         return xx * t1 - xy * t2 + xz * t3 - xw * t4;
     }
-    
+
     invert(): Mat4 {
         const xx = this.xx, xy = this.xy, xz = this.xz, xw = this.xw,
             yx = this.yx, yy = this.yy, yz = this.yz, yw = this.yw,
@@ -228,7 +228,7 @@ export default class Mat4 implements WMat4 {
             t3 = yw * (zx * wy - wx * zy) + yx * (zy * ww - wy * zw) + yy * (zw * wx - ww * zx),
             t4 = yx * (zy * wz - wy * zz) + yy * (zz * wx - wz * zx) + yz * (zx * wy - wx * zy);
         const detInv = 1 / (xx * t1 - xy * t2 + xz * t3 - xw * t4);
-        
+
         return new Mat4(
             detInv * t1,
             - detInv * (xy * (zz * ww - wz * zw) + xz * (zw * wy - ww * zy) + xw * (zy * wz - wy * zz)),
@@ -240,7 +240,7 @@ export default class Mat4 implements WMat4 {
             detInv * (xx * (yz * zw - zz * yw) + xz * (yw * zx - zw * yx) + xw * (yx * zz - zx * yz)),
             detInv * t3,
             - detInv * (xx * (zy * ww - wy * zw) + xy * (zw * wx - ww * zx) + xw * (zx * wy - wx * zy)),
-            detInv * (xx * (yy * ww - wy * yw) + xy * (yw * wx - ww * yx) + xw * (yx * wy - wx * yy)), 
+            detInv * (xx * (yy * ww - wy * yw) + xy * (yw * wx - ww * yx) + xw * (yx * wy - wx * yy)),
             - detInv * (xx * (yy * zw - zy * yw) + xy * (yw * zx - zw * yx) + xw * (yx * zy - zx * yy)),
             - detInv * t4,
             detInv * (xx * (zy * wz - wy * zz) + xy * (zz * wx - wz * zx) + xz * (zx * wy - wx * zy)),
@@ -248,7 +248,7 @@ export default class Mat4 implements WMat4 {
             detInv * (xx * (yy * zz - zy * yz) + xy * (yz * zx - zz * yx) + xz * (yx * zy - zx * yy))
         );
     }
-    
+
     invertSelf(): Mat4 {
         const xx = this.xx, xy = this.xy, xz = this.xz, xw = this.xw,
             yx = this.yx, yy = this.yy, yz = this.yz, yw = this.yw,
@@ -259,26 +259,26 @@ export default class Mat4 implements WMat4 {
             t3 = yw * (zx * wy - wx * zy) + yx * (zy * ww - wy * zw) + yy * (zw * wx - ww * zx),
             t4 = yx * (zy * wz - wy * zz) + yy * (zz * wx - wz * zx) + yz * (zx * wy - wx * zy);
         const detInv = 1 / (xx * t1 - xy * t2 + xz * t3 - xw * t4);
-        
+
         this.xx = detInv * t1,
-        this.xy = - detInv * (xy * (zz * ww - wz * zw) + xz * (zw * wy - ww * zy) + xw * (zy * wz - wy * zz)),
-        this.xz = detInv * (xy * (yz * ww - wz * yw) + xz * (yw * wy - ww * yy) + xw * (yy * wz - wy * yz)),
-        this.xw = - detInv * (xy * (yz * zw - zz * yw) + xz * (yw * zy - zw * yy) + xw * (yy * zz - zy * yz)),
-        this.yx = - detInv * t2,
-        this.yy = detInv * (xx * (zz * ww - wz * zw) + xz * (zw * wx - ww * zx) + xw * (zx * wz - wx * zz)),
-        this.yz = - detInv * (xx * (yz * ww - wz * yw) + xz * (yw * wx - ww * yx) + xw * (yx * wz - wx * yz)),
-        this.yw = detInv * (xx * (yz * zw - zz * yw) + xz * (yw * zx - zw * yx) + xw * (yx * zz - zx * yz)),
-        this.zx = detInv * t3,
-        this.zy = - detInv * (xx * (zy * ww - wy * zw) + xy * (zw * wx - ww * zx) + xw * (zx * wy - wx * zy)),
-        this.zz = detInv * (xx * (yy * ww - wy * yw) + xy * (yw * wx - ww * yx) + xw * (yx * wy - wx * yy)), 
-        this.zw = -detInv * (xx * (yy* zw - zy * yw) + xy * (yw * zx - zw * yx) + xw * (yx * zy - zx * yy)),
-        this.wx = - detInv * t4,
-        this.wy = detInv * (xx * (zy * wz - wy * zz) + xy * (zz * wx - wz * zx) + xz * (zx * wy - wx * zy)),
-        this.wz = - detInv * (xx * (yy * wz - wy * yz) + xy * (yz * wx - wz * yx) + xz * (yx * wy - wx * yy)),
-        this.ww = detInv * (xx * (yy * zz - zy * yz) + xy * (yz * zx - zz * yx) + xz * (yx * zy - zx * yy))
+            this.xy = - detInv * (xy * (zz * ww - wz * zw) + xz * (zw * wy - ww * zy) + xw * (zy * wz - wy * zz)),
+            this.xz = detInv * (xy * (yz * ww - wz * yw) + xz * (yw * wy - ww * yy) + xw * (yy * wz - wy * yz)),
+            this.xw = - detInv * (xy * (yz * zw - zz * yw) + xz * (yw * zy - zw * yy) + xw * (yy * zz - zy * yz)),
+            this.yx = - detInv * t2,
+            this.yy = detInv * (xx * (zz * ww - wz * zw) + xz * (zw * wx - ww * zx) + xw * (zx * wz - wx * zz)),
+            this.yz = - detInv * (xx * (yz * ww - wz * yw) + xz * (yw * wx - ww * yx) + xw * (yx * wz - wx * yz)),
+            this.yw = detInv * (xx * (yz * zw - zz * yw) + xz * (yw * zx - zw * yx) + xw * (yx * zz - zx * yz)),
+            this.zx = detInv * t3,
+            this.zy = - detInv * (xx * (zy * ww - wy * zw) + xy * (zw * wx - ww * zx) + xw * (zx * wy - wx * zy)),
+            this.zz = detInv * (xx * (yy * ww - wy * yw) + xy * (yw * wx - ww * yx) + xw * (yx * wy - wx * yy)),
+            this.zw = -detInv * (xx * (yy * zw - zy * yw) + xy * (yw * zx - zw * yx) + xw * (yx * zy - zx * yy)),
+            this.wx = - detInv * t4,
+            this.wy = detInv * (xx * (zy * wz - wy * zz) + xy * (zz * wx - wz * zx) + xz * (zx * wy - wx * zy)),
+            this.wz = - detInv * (xx * (yy * wz - wy * yz) + xy * (yz * wx - wz * yx) + xz * (yx * wy - wx * yy)),
+            this.ww = detInv * (xx * (yy * zz - zy * yz) + xy * (yz * zx - zz * yx) + xz * (yx * zy - zx * yy))
         return this;
     }
-    
+
     multiplyVec(v: LVec4): Vec4 {
         const vx = v.x, vy = v.y, vz = v.z, vw = v.w;
         return new Vec4(
@@ -288,7 +288,7 @@ export default class Mat4 implements WMat4 {
             this.wx * vx + this.wy * vy + this.wz * vz + this.ww * vw
         );
     }
-    
+
     vecMultiply(v: LVec4): Vec4 {
         const vx = v.x, vy = v.y, vz = v.z, vw = v.w;
         return new Vec4(
@@ -298,7 +298,7 @@ export default class Mat4 implements WMat4 {
             this.xw * vx + this.yw * vy + this.zw * vz + this.ww * vw
         );
     }
-    
+
     transpose(): Mat4 {
         return new Mat4(
             this.xx, this.yx, this.zx, this.wx,
@@ -307,7 +307,7 @@ export default class Mat4 implements WMat4 {
             this.xw, this.yw, this.zw, this.ww
         );
     }
-    
+
     transposeSelf(): Mat4 {
         const xy = this.xy, xz = this.xz, xw = this.xw,
             yz = this.yz, yw = this.yw,
@@ -326,8 +326,8 @@ export default class Mat4 implements WMat4 {
         this.wz = zw;
         return this;
     }
-    
-    copy():Mat4 {
+
+    copy(): Mat4 {
         return new Mat4(
             this.xx, this.xy, this.xz, this.xw,
             this.yx, this.yy, this.yz, this.yw,
@@ -335,9 +335,9 @@ export default class Mat4 implements WMat4 {
             this.wx, this.wy, this.wz, this.ww
         );
     }
-    
-    equals(o:LMat4, tolerance:number = 0):boolean {
-        if(tolerance > 0) {
+
+    equals(o: LMat4, tolerance: number = 0): boolean {
+        if (tolerance > 0) {
             return Math.abs(this.xx - o.xx) < tolerance
                 && Math.abs(this.xy - o.xy) < tolerance
                 && Math.abs(this.xz - o.xz) < tolerance
