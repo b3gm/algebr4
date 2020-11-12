@@ -1,4 +1,4 @@
-import Vec4 from '../Vec4';
+import { Vec4 } from '../Vec4';
 import 'jest';
 
 function testVec() {
@@ -12,14 +12,14 @@ function testVec2() {
 describe(Vec4, () => {
     it('should compare vectors', () => {
         const a = testVec();
-        for(let c of ['x', 'y', 'z', 'w']) {
+        for (const c of ['x', 'y', 'z', 'w']) {
             const b = a.copy();
             b[c] += 0.001;
             expect(a.equals(b)).toBe(false);
             expect(a.equals(b, 1.0e-2)).toBe(true);
         }
     });
-    
+
     it('should add vectors', () => {
         const a = testVec();
         const b = testVec2();
@@ -27,7 +27,7 @@ describe(Vec4, () => {
         expect(a).toMatchObject(testVec());
         expect(b).toMatchObject(testVec2());
     });
-    
+
     it('should add to itself', () => {
         const a = testVec();
         const b = testVec2();
@@ -35,7 +35,7 @@ describe(Vec4, () => {
         expect(a.addSelf(b)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     })
-    
+
     it('should subtract vectors', () => {
         const a = testVec();
         const b = testVec2();
@@ -44,7 +44,7 @@ describe(Vec4, () => {
         );
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should subtract vectors from itself', () => {
         const a = testVec();
         const b = testVec2();
@@ -52,42 +52,42 @@ describe(Vec4, () => {
         expect(a.subtractSelf(b)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     });
-    
+
     it('should calculate the norm square', () => {
         expect(testVec().normSquare()).toBe(30);
     });
-    
+
     it('should calculate the norm', () => {
         expect(testVec().norm()).toBe(Math.sqrt(30));
     })
-    
+
     it('should dot product vectors', () => {
         expect(testVec().dot(testVec())).toBe(testVec().normSquare());
     });
-    
+
     it('should scalar multiply', () => {
         const a = testVec();
         expect(a.scalarMultiply(2)).toMatchObject(new Vec4(2, 4, 6, 8));
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should scalar multiply itself', () => {
         const a = testVec();
         const expected = new Vec4(2, 4, 6, 8);
         expect(a.scalarMultiplySelf(2)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     });
-    
+
     it('should calculate the infinity norm', () => {
         expect(testVec().lInfNorm()).toBe(4);
         expect(testVec().scalarMultiplySelf(-1).lInfNorm()).toBe(4);
     });
-    
+
     it('should calculate the l1 norm', () => {
         expect(testVec().l1Norm()).toBe(10);
         expect(testVec().scalarMultiplySelf(-1).l1Norm()).toBe(10);
     });
-    
+
     it('should normalize', () => {
         const norm = Math.sqrt(30);
         const a = testVec();
@@ -99,7 +99,7 @@ describe(Vec4, () => {
         });
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should normalize itself', () => {
         const norm = Math.sqrt(30);
         const a = testVec();
@@ -112,16 +112,16 @@ describe(Vec4, () => {
         expect(a.normalizeSelf()).toMatchObject(expectedValue);
         expect(a).toMatchObject(expectedValue)
     });
-    
+
     it('should convert to an array', () => {
         expect(testVec().toArray()).toMatchObject([1, 2, 3, 4]);
     });
-    
+
     it('should import arrays', () => {
         expect(Vec4.fromArray([])).toMatchObject(new Vec4(0, 0, 0, 0));
         expect(Vec4.fromArray([1, 2, 3, 4])).toMatchObject(testVec());
     });
-    
+
     it('should import literals', () => {
         expect(Vec4.fromLiteral(testVec())).toMatchObject(testVec());
     });

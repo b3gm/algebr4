@@ -1,24 +1,24 @@
-import LVec3 from './LVec3';
-import Vec3 from './Vec3';
-import Mat3 from './Mat3';
-import LQuaternion from './LQuaternion';
-import WQuaternion from './WQuaternion';
+import { LVec3 } from './LVec3';
+import { Vec3 } from './Vec3';
+import { Mat3 } from './Mat3';
+import { LQuaternion } from './LQuaternion';
+import { WQuaternion } from './WQuaternion';
 
 const cos = Math.cos;
 const sin = Math.sin;
 const sqrt = Math.sqrt;
 
-export default class Quaternion implements WQuaternion {
-    
-    public static fromFlatArray(a:Array<number>):Quaternion {
+export class Quaternion implements WQuaternion {
+
+    public static fromFlatArray(a: Array<number>): Quaternion {
         return new Quaternion(a[0] || 0, a[1] || 0, a[2] || 0, a[3] || 0);
     }
-    
-    public static fromVec3(vec:LVec3):Quaternion {
+
+    public static fromVec3(vec: LVec3): Quaternion {
         return new Quaternion(0, vec.x, vec.y, vec.z);
     }
-    
-    public static fromAngleAxisUnsafe(a:number, vec:LVec3):Quaternion {
+
+    public static fromAngleAxisUnsafe(a: number, vec: LVec3): Quaternion {
         const aHalf = a / 2, sinAHalf = sin(aHalf);
         return new Quaternion(
             cos(aHalf),
@@ -27,11 +27,11 @@ export default class Quaternion implements WQuaternion {
             sinAHalf * vec.z
         );
     }
-    
+
     // source: http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
-    public static fromRotationMatrixUnsafe(m:Mat3):Quaternion {
+    public static fromRotationMatrixUnsafe(m: Mat3): Quaternion {
         const tr = m.xx + m.yy + m.zz;
-        if(tr > 0) {
+        if (tr > 0) {
             const s = sqrt(tr + 1) * 2;
             return new Quaternion(
                 0.25 * s,
@@ -64,7 +64,7 @@ export default class Quaternion implements WQuaternion {
             0.25 * s
         );
     }
-    
+
     constructor(
         public w: number,
         public x: number,
@@ -72,8 +72,8 @@ export default class Quaternion implements WQuaternion {
         public z: number
     ) {
     }
-    
-    public add(q:Quaternion):Quaternion {
+
+    public add(q: Quaternion): Quaternion {
         return new Quaternion(
             this.w + q.w,
             this.x + q.x,
@@ -81,16 +81,16 @@ export default class Quaternion implements WQuaternion {
             this.z + q.z
         );
     }
-    
-    public addSelf(q:Quaternion):Quaternion {
+
+    public addSelf(q: Quaternion): Quaternion {
         this.w += q.w;
         this.x += q.x;
         this.y += q.y;
         this.z += q.z;
         return this;
     }
-    
-    public subtract(q:Quaternion):Quaternion {
+
+    public subtract(q: Quaternion): Quaternion {
         return new Quaternion(
             this.w - q.w,
             this.x - q.x,
@@ -98,16 +98,16 @@ export default class Quaternion implements WQuaternion {
             this.z - q.z
         );
     }
-    
-    public subtractSelf(q:Quaternion):Quaternion {
+
+    public subtractSelf(q: Quaternion): Quaternion {
         this.w -= q.w;
         this.x -= q.x;
         this.y -= q.y;
         this.z -= q.z;
         return this;
     }
-    
-    public scalarMultiply(f:number):Quaternion {
+
+    public scalarMultiply(f: number): Quaternion {
         return new Quaternion(
             this.w * f,
             this.x * f,
@@ -115,16 +115,16 @@ export default class Quaternion implements WQuaternion {
             this.z * f
         );
     }
-    
-    public scalarMultiplySelf(f:number):Quaternion {
+
+    public scalarMultiplySelf(f: number): Quaternion {
         this.w *= f;
         this.x *= f;
         this.y *= f;
         this.z *= f;
         return this;
     }
-    
-    public multiply(q:LQuaternion):Quaternion {
+
+    public multiply(q: LQuaternion): Quaternion {
         const w = this.w, x = this.x, y = this.y, z = this.z,
             qw = q.w, qx = q.x, qy = q.y, qz = q.z;
         return new Quaternion(
@@ -134,27 +134,27 @@ export default class Quaternion implements WQuaternion {
             w * qz + x * qy - y * qx + z * qw
         );
     }
-    
-    public multiplySelf(q:LQuaternion):Quaternion {
+
+    public multiplySelf(q: LQuaternion): Quaternion {
         const w = this.w, x = this.x, y = this.y, z = this.z,
             qw = q.w, qx = q.x, qy = q.y, qz = q.z;
         this.w = w * qw - x * qx - y * qy - z * qz,
-        this.x = w * qx + x * qw + y * qz - z * qy,
-        this.y = w * qy - x * qz + y * qw + z * qx,
-        this.z = w * qz + x * qy - y * qx + z * qw;
+            this.x = w * qx + x * qw + y * qz - z * qy,
+            this.y = w * qy - x * qz + y * qw + z * qx,
+            this.z = w * qz + x * qy - y * qx + z * qw;
         return this;
     }
-    
-    public normSquare():number {
+
+    public normSquare(): number {
         const w = this.w, x = this.x, y = this.y, z = this.z;
         return w * w + x * x + y * y + z * z;
     }
-    
-    public norm() {
+
+    public norm(): number {
         return sqrt(this.normSquare());
     }
-    
-    public normalize():Quaternion {
+
+    public normalize(): Quaternion {
         const norm = this.norm();
         return new Quaternion(
             this.w / norm,
@@ -163,8 +163,8 @@ export default class Quaternion implements WQuaternion {
             this.z / norm
         );
     }
-    
-    public normalizeSelf():Quaternion {
+
+    public normalizeSelf(): Quaternion {
         const norm = this.norm();
         this.w /= norm;
         this.x /= norm;
@@ -172,8 +172,8 @@ export default class Quaternion implements WQuaternion {
         this.z /= norm;
         return this;
     }
-    
-    public conjugate():Quaternion {
+
+    public conjugate(): Quaternion {
         return new Quaternion(
             this.w,
             - this.x,
@@ -181,23 +181,22 @@ export default class Quaternion implements WQuaternion {
             - this.z
         );
     }
-    
-    public conjugateSelf():Quaternion {
-        this.w = this.w;
+
+    public conjugateSelf(): Quaternion {
         this.x = -this.x;
         this.y = -this.y;
         this.z = -this.z;
         return this;
     }
-    
-    public turnUnsafe(vec:LVec3):Vec3 {
+
+    public turnUnsafe(vec: LVec3): Vec3 {
         return Vec3.fromLiteral(
             this.multiply(Quaternion.fromVec3(vec))
                 .multiplySelf(this.conjugate())
         );
     }
-    
-    public copy():Quaternion {
+
+    public copy(): Quaternion {
         return new Quaternion(
             this.w,
             this.x,
@@ -205,5 +204,5 @@ export default class Quaternion implements WQuaternion {
             this.z
         );
     }
-    
+
 }

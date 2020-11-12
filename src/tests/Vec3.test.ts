@@ -1,4 +1,4 @@
-import Vec3 from '../Vec3';
+import { Vec3 } from '../Vec3';
 import 'jest';
 
 function testVec() {
@@ -12,14 +12,14 @@ function testVec2() {
 describe(Vec3, () => {
     it('should compare vectors', () => {
         const a = testVec();
-        for(let c of ['x', 'y', 'z']) {
+        for (const c of ['x', 'y', 'z']) {
             const b = a.copy();
             b[c] += 0.001;
             expect(a.equals(b)).toBe(false);
             expect(a.equals(b, 1.0e-2)).toBe(true);
         }
     });
-    
+
     it('should add vectors', () => {
         const a = testVec();
         const b = testVec2();
@@ -27,7 +27,7 @@ describe(Vec3, () => {
         expect(a).toMatchObject(testVec());
         expect(b).toMatchObject(testVec2());
     });
-    
+
     it('should add to itself', () => {
         const a = testVec();
         const b = testVec2();
@@ -35,7 +35,7 @@ describe(Vec3, () => {
         expect(a.addSelf(b)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     })
-    
+
     it('should subtract vectors', () => {
         const a = testVec();
         const b = testVec2();
@@ -44,7 +44,7 @@ describe(Vec3, () => {
         );
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should subtract vectors from itself', () => {
         const a = testVec();
         const b = testVec2();
@@ -52,19 +52,19 @@ describe(Vec3, () => {
         expect(a.subtractSelf(b)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     });
-    
+
     it('should calculate the norm square', () => {
         expect(testVec().normSquare()).toBe(14);
     });
-    
+
     it('should calculate the norm', () => {
         expect(testVec().norm()).toBe(Math.sqrt(14));
     });
-    
+
     it('should dot product vectors', () => {
         expect(testVec().dot(testVec())).toBe(testVec().normSquare());
     });
-    
+
     it('should cross multiply vector', () => {
         expect(new Vec3(1, 0, 0).cross(new Vec3(0, 1, 0)))['matchesVector'](
             new Vec3(0, 0, 1)
@@ -76,30 +76,30 @@ describe(Vec3, () => {
             new Vec3(0, 1, 0)
         );
     });
-    
+
     it('should scalar multiply', () => {
         const a = testVec();
         expect(a.scalarMultiply(2)).toMatchObject(new Vec3(2, 4, 6));
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should scalar multiply itself', () => {
         const a = testVec();
         const expected = new Vec3(2, 4, 6);
         expect(a.scalarMultiplySelf(2)).toMatchObject(expected);
         expect(a).toMatchObject(expected);
     });
-    
+
     it('should calculate the infinity norm', () => {
         expect(testVec().lInfNorm()).toBe(3);
         expect(testVec().scalarMultiplySelf(-1).lInfNorm()).toBe(3);
     });
-    
+
     it('should calculate the l1 norm', () => {
         expect(testVec().l1Norm()).toBe(6);
         expect(testVec().scalarMultiplySelf(-1).l1Norm()).toBe(6);
     });
-    
+
     it('should normalize', () => {
         const norm = Math.sqrt(14);
         const a = testVec();
@@ -110,7 +110,7 @@ describe(Vec3, () => {
         });
         expect(a).toMatchObject(testVec());
     });
-    
+
     it('should normalize itself', () => {
         const norm = Math.sqrt(14);
         const a = testVec();
@@ -122,20 +122,20 @@ describe(Vec3, () => {
         expect(a.normalizeSelf()).toMatchObject(expectedValue);
         expect(a).toMatchObject(expectedValue)
     });
-    
+
     it('should convert to an array', () => {
         expect(testVec().toArray()).toMatchObject([1, 2, 3]);
     });
-    
+
     it('should import arrays', () => {
         expect(Vec3.fromArray([])).toMatchObject(new Vec3(0, 0, 0));
         expect(Vec3.fromArray([1, 2, 3])).toMatchObject(testVec());
     });
-    
+
     it('should import literals', () => {
         expect(Vec3.fromLiteral(testVec())).toMatchObject(testVec());
     });
-    
+
     it('should turn vectors', () => {
         expect(
             new Vec3(0, 1, 0).turnDeg(new Vec3(1, 0, 0), 90)
@@ -147,7 +147,7 @@ describe(Vec3, () => {
             new Vec3(0, 0, 1).turnDeg(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
-    
+
     it('should turn vectors unsafely', () => {
         expect(
             new Vec3(0, 1, 0).turnDegUnsafe(new Vec3(1, 0, 0), 90)
@@ -159,7 +159,7 @@ describe(Vec3, () => {
             new Vec3(0, 0, 1).turnDegUnsafe(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
-    
+
     it('should turn itself', () => {
         expect(
             new Vec3(0, 1, 0).turnDegSelf(new Vec3(1, 0, 0), 90)
@@ -171,7 +171,7 @@ describe(Vec3, () => {
             new Vec3(0, 0, 1).turnDegSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
-    
+
     it('should turn itself unsafely', () => {
         expect(
             new Vec3(0, 1, 0).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
@@ -183,7 +183,7 @@ describe(Vec3, () => {
             new Vec3(0, 0, 1).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
-    
+
     it('should calculate the angle between vectors', () => {
         expect(new Vec3(-1, 0, 0).angle(new Vec3(1, 0.1, 0)))
             .toBeCloseTo(Math.PI * 0.968275, 5);
@@ -191,14 +191,14 @@ describe(Vec3, () => {
             .toBeCloseTo(Math.PI * 0.968275, 5);
     });
 });
-    
+
 expect.extend({
-    'matchesVector': (received: Vec3, expected:Vec3, ...actual:Vec3[]) => {
+    'matchesVector': (received: Vec3, expected: Vec3) => {
         const passX = Math.abs(expected.x - received.x) < 1.0e-6;
         const passY = Math.abs(expected.y - received.y) < 1.0e-6;
         const passZ = Math.abs(expected.z - received.z) < 1.0e-6;
-        
-        if(passX && passY && passZ) {
+
+        if (passX && passY && passZ) {
             return {
                 pass: true,
                 message: () => `Expected ${toString(received)} to differ at most by 1.0e-6 in any component from ${toString(expected)}.`
@@ -211,6 +211,6 @@ expect.extend({
     }
 });
 
-function toString(obj:any) {
+function toString(obj: any) {
     return JSON.stringify(obj);
 }

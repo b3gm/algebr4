@@ -1,11 +1,8 @@
-import Mat4 from '../Mat4';
-import Mat3 from '../Mat3';
-import Mat2 from '../Mat2';
-import Vec4 from '../Vec4';
-import Vec3 from '../Vec3';
-import Vec2 from '../Vec2';
+import { Mat4 } from '../Mat4';
+import { Mat3 } from '../Mat3';
+import { Mat2 } from '../Mat2';
 
-export function testMat4():Mat4 {
+export function testMat4(): Mat4 {
     return Mat4.fromRowMajorArray([
         [2, -1, 3, 0],
         [-3, 1, 0, 4],
@@ -69,7 +66,7 @@ export function incrementing2(): Mat2 {
     );
 }
 
-export function array4():Array<Array<number>> {
+export function array4(): Array<Array<number>> {
     return [
         [0, 0, 0, 0],
         [0, 0, 0, 0],
