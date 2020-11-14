@@ -1,6 +1,6 @@
 {
   "name": "@b3gm/algebr4",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Linear algebra objects for up to 4 dimensions",
   "main": "dist/algebr4.js",
   "types": "dist/algebr4.d.ts",
