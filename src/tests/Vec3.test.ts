@@ -136,51 +136,51 @@ describe(Vec3, () => {
         expect(Vec3.fromLiteral(testVec())).toMatchObject(testVec());
     });
 
-    it('should turn vectors', () => {
+    it('should rotate vectors', () => {
         expect(
-            new Vec3(0, 1, 0).turnDeg(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 1, 0).rotateDeg(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, 0, 1));
         expect(
-            new Vec3(1, 0, 0).turnDeg(new Vec3(1, 0, 0), 90)
+            new Vec3(1, 0, 0).rotateDeg(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(1, 0, 0));
         expect(
-            new Vec3(0, 0, 1).turnDeg(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 0, 1).rotateDeg(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
 
-    it('should turn vectors unsafely', () => {
+    it('should rotate vectors unsafely', () => {
         expect(
-            new Vec3(0, 1, 0).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 1, 0).rotateDegUnsafe(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, 0, 1));
         expect(
-            new Vec3(1, 0, 0).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+            new Vec3(1, 0, 0).rotateDegUnsafe(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(1, 0, 0));
         expect(
-            new Vec3(0, 0, 1).turnDegUnsafe(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 0, 1).rotateDegUnsafe(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
 
-    it('should turn itself', () => {
+    it('should rotate itself', () => {
         expect(
-            new Vec3(0, 1, 0).turnDegSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 1, 0).rotateDegSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, 0, 1));
         expect(
-            new Vec3(1, 0, 0).turnDegSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(1, 0, 0).rotateDegSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(1, 0, 0));
         expect(
-            new Vec3(0, 0, 1).turnDegSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 0, 1).rotateDegSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
 
-    it('should turn itself unsafely', () => {
+    it('should rotate itself unsafely', () => {
         expect(
-            new Vec3(0, 1, 0).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 1, 0).rotateDegUnsafeSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, 0, 1));
         expect(
-            new Vec3(1, 0, 0).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(1, 0, 0).rotateDegUnsafeSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(1, 0, 0));
         expect(
-            new Vec3(0, 0, 1).turnDegUnsafeSelf(new Vec3(1, 0, 0), 90)
+            new Vec3(0, 0, 1).rotateDegUnsafeSelf(new Vec3(1, 0, 0), 90)
         )['matchesVector'](new Vec3(0, -1, 0));
     });
 

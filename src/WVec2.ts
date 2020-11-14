@@ -11,8 +11,8 @@ export interface WVec2 extends RVec2 {
     subtract(vec: LVec2): WVec2;
     scalarMultiply(factor: number): WVec2;
     normalize(): WVec2
-    turnRad(angle: number): WVec2;
-    turnDeg(angle: number): WVec2;
+    rotateRad(angle: number): WVec2;
+    rotateDeg(angle: number): WVec2;
     copy(): WVec2;
 
     // new methods
@@ -20,7 +20,7 @@ export interface WVec2 extends RVec2 {
     subtractSelf(vec: LVec2): WVec2;
     scalarMultiplySelf(factor: number): WVec2;
     normalizeSelf(): WVec2;
-    turnRadSelf(angle: number): WVec2;
-    turnDegSelf(angle: number): WVec2;
+    rotateRadSelf(angle: number): WVec2;
+    rotateDegSelf(angle: number): WVec2;
 
 }

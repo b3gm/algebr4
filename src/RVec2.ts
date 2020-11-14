@@ -12,8 +12,8 @@ export interface RVec2 extends LVec2 {
     l1Norm(): number;
     lInfNorm(): number;
     normalize(): RVec2;
-    turnRad(angle: number): RVec2;
-    turnDeg(angle: number): RVec2;
+    rotateRad(angle: number): RVec2;
+    rotateDeg(angle: number): RVec2;
     angleUnsafe(vec: LVec2): number;
     angleUnsafe(vec: LVec2): number;
     angle(vec: LVec2): number;

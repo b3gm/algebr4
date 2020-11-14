@@ -115,13 +115,13 @@ describe(Quaternion, () => {
         expect(c)['equals'](testQ());
     });
 
-    it('should correctly turn a vector', () => {
+    it('should correctly rotate a vector', () => {
         const v: RVec3 = new Vec3(0, 1, 0);
         const q = Quaternion.fromAngleAxisUnsafe(
             Math.PI / 4,
             new Vec3(1, 0, 0)
         );
-        const vPrime = q.turnUnsafe(v);
+        const vPrime = q.rotateUnsafe(v);
         expect(vPrime.x).toBeCloseTo(0, TOL);
         expect(vPrime.y).toBeCloseTo(1 / Math.sqrt(2), TOL);
         expect(vPrime.z).toBeCloseTo(1 / Math.sqrt(2), TOL);

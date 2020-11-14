@@ -131,21 +131,21 @@ describe(Vec2, () => {
         expect(Vec2.fromLiteral(testVec())).toMatchObject(testVec());
     });
 
-    it('should turn itself', () => {
+    it('should rotate itself', () => {
         expect(
-            new Vec2(0, 1).turnDeg(90)
+            new Vec2(0, 1).rotateDeg(90)
         )['matchesVector'](new Vec2(-1, 0));
         expect(
-            new Vec2(1, 0).turnDeg(90)
+            new Vec2(1, 0).rotateDeg(90)
         )['matchesVector'](new Vec2(0, 1));
     });
 
-    it('should turn itself unsafely', () => {
+    it('should rotate itself unsafely', () => {
         expect(
-            new Vec2(0, 1).turnDegSelf(90)
+            new Vec2(0, 1).rotateDegSelf(90)
         )['matchesVector'](new Vec2(-1, 0));
         expect(
-            new Vec2(1, 0).turnDegSelf(90)
+            new Vec2(1, 0).rotateDegSelf(90)
         )['matchesVector'](new Vec2(0, 1));
     });
 

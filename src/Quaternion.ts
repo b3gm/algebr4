@@ -189,7 +189,7 @@ export class Quaternion implements WQuaternion {
         return this;
     }
 
-    public turnUnsafe(vec: LVec3): Vec3 {
+    public rotateUnsafe(vec: LVec3): Vec3 {
         return Vec3.fromLiteral(
             this.multiply(Quaternion.fromVec3(vec))
                 .multiplySelf(this.conjugate())

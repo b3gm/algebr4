@@ -92,7 +92,7 @@ export class Vec3 implements WVec3 {
         return this;
     }
 
-    public turnRadUnsafe(axis: LVec3, angle: number): Vec3 {
+    public rotateRadUnsafe(axis: LVec3, angle: number): Vec3 {
         const x = this.x;
         const y = this.y;
         const z = this.z;
@@ -115,14 +115,14 @@ export class Vec3 implements WVec3 {
         );
     }
 
-    public turnRad(axis: LVec3, angle: number): Vec3 {
-        return this.turnRadUnsafe(
+    public rotateRad(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRadUnsafe(
             Vec3.fromLiteral(axis).normalizeSelf(),
             angle
         );
     }
 
-    public turnRadUnsafeSelf(axis: LVec3, angle: number): Vec3 {
+    public rotateRadUnsafeSelf(axis: LVec3, angle: number): Vec3 {
         const x = this.x;
         const y = this.y;
         const z = this.z;
@@ -144,30 +144,30 @@ export class Vec3 implements WVec3 {
         return this;
     }
 
-    public turnRadSelf(axis: LVec3, angle: number): Vec3 {
-        return this.turnRadUnsafeSelf(
+    public rotateRadSelf(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRadUnsafeSelf(
             Vec3.fromLiteral(axis).normalizeSelf(),
             angle
         );
     }
 
-    public turnDegUnsafe(axis: LVec3, angle: number): Vec3 {
-        return this.turnRadUnsafe(axis, angle * DEG2RAD);
+    public rotateDegUnsafe(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRadUnsafe(axis, angle * DEG2RAD);
     }
 
-    public turnDeg(axis: LVec3, angle: number): Vec3 {
-        return this.turnRad(
+    public rotateDeg(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRad(
             Vec3.fromLiteral(axis).normalizeSelf(),
             angle * DEG2RAD
         );
     }
 
-    public turnDegUnsafeSelf(axis: LVec3, angle: number): Vec3 {
-        return this.turnRadUnsafeSelf(axis, angle * DEG2RAD);
+    public rotateDegUnsafeSelf(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRadUnsafeSelf(axis, angle * DEG2RAD);
     }
 
-    public turnDegSelf(axis: LVec3, angle: number): Vec3 {
-        return this.turnRadSelf(
+    public rotateDegSelf(axis: LVec3, angle: number): Vec3 {
+        return this.rotateRadSelf(
             Vec3.fromLiteral(axis).normalizeSelf(),
             angle * DEG2RAD
         );

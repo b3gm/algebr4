@@ -17,7 +17,7 @@ export interface WQuaternion extends RQuaternion {
     multiply(q: LQuaternion): WQuaternion;
     normalize(): WQuaternion;
     conjugate(): WQuaternion;
-    turnUnsafe(vec: LVec3): WVec3;
+    rotateUnsafe(vec: LVec3): WVec3;
     copy(): WQuaternion;
 
     // new methods

@@ -80,7 +80,7 @@ export class Vec2 implements WVec2 {
         return this;
     }
 
-    public turnRad(angle: number): Vec2 {
+    public rotateRad(angle: number): Vec2 {
         const x = this.x;
         const y = this.y;
         const cosA = Math.cos(angle);
@@ -91,7 +91,7 @@ export class Vec2 implements WVec2 {
         );
     }
 
-    public turnRadSelf(angle: number): Vec2 {
+    public rotateRadSelf(angle: number): Vec2 {
         const x = this.x;
         const y = this.y;
         const cosA = Math.cos(angle);
@@ -101,12 +101,12 @@ export class Vec2 implements WVec2 {
         return this;
     }
 
-    public turnDeg(angle: number): Vec2 {
-        return this.turnRad(angle * DEG2RAD);
+    public rotateDeg(angle: number): Vec2 {
+        return this.rotateRad(angle * DEG2RAD);
     }
 
-    public turnDegSelf(angle: number): Vec2 {
-        return this.turnRadSelf(angle * DEG2RAD);
+    public rotateDegSelf(angle: number): Vec2 {
+        return this.rotateRadSelf(angle * DEG2RAD);
     }
 
     public angleUnsafe(vec: LVec2): number {

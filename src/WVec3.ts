@@ -13,10 +13,10 @@ export interface WVec3 extends RVec3 {
     subtract(vec: LVec3): WVec3;
     scalarMultiply(factor: number): WVec3;
     normalize(): WVec3;
-    turnRadUnsafe(axis: LVec3, angle: number): WVec3;
-    turnRad(axis: LVec3, angle: number): WVec3;
-    turnDegUnsafe(axis: LVec3, angle: number): WVec3;
-    turnDeg(axis: LVec3, angle: number): WVec3;
+    rotateRadUnsafe(axis: LVec3, angle: number): WVec3;
+    rotateRad(axis: LVec3, angle: number): WVec3;
+    rotateDegUnsafe(axis: LVec3, angle: number): WVec3;
+    rotateDeg(axis: LVec3, angle: number): WVec3;
     copy(): WVec3;
 
     // new methods
@@ -24,7 +24,7 @@ export interface WVec3 extends RVec3 {
     subtractSelf(vec: LVec3): WVec3;
     scalarMultiplySelf(factor: number): WVec3;
     normalizeSelf(): WVec3;
-    turnRadSelf(axis: LVec3, angle: number): WVec3;
-    turnDegSelf(axis: LVec3, angle: number): WVec3;
+    rotateRadSelf(axis: LVec3, angle: number): WVec3;
+    rotateDegSelf(axis: LVec3, angle: number): WVec3;
     toArray(): Array<number>;
 }

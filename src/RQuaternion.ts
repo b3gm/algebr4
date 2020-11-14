@@ -12,7 +12,7 @@ export interface RQuaternion extends LQuaternion {
     norm(): number;
     normalize(): RQuaternion;
     conjugate(): RQuaternion;
-    turnUnsafe(vec: LVec3): RVec3;
+    rotateUnsafe(vec: LVec3): RVec3;
     copy(): RQuaternion;
 
 }

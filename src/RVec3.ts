@@ -12,10 +12,10 @@ export interface RVec3 extends LVec3 {
     l1Norm(): number;
     lInfNorm(): number;
     normalize(): RVec3;
-    turnRadUnsafe(axis: RVec3, angle: number): RVec3;
-    turnRad(axis: RVec3, angle: number): RVec3;
-    turnDegUnsafe(axis: RVec3, angle: number): RVec3;
-    turnDeg(axis: RVec3, angle: number): RVec3;
+    rotateRadUnsafe(axis: RVec3, angle: number): RVec3;
+    rotateRad(axis: RVec3, angle: number): RVec3;
+    rotateDegUnsafe(axis: RVec3, angle: number): RVec3;
+    rotateDeg(axis: RVec3, angle: number): RVec3;
     angleUnsafe(vec: LVec3): number;
     angleUnsafe(vec: LVec3): number;
     angle(vec: LVec3): number;
