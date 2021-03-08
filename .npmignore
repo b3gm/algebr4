@@ -2,6 +2,7 @@ nbproject/
 node_modules/
 src/
 coverage/
+dist/tests/
 webpack.*.js
 *.tgz
 tsconfig*.json
