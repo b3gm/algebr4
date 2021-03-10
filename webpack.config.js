@@ -16,7 +16,7 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist', 'bundle'),
     filename: 'algebr4.bundle.js',
     library: 'algebr4'
   }

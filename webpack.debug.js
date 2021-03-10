@@ -19,7 +19,7 @@ module.exports = {
     minimize: false
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist', 'bundle'),
     filename: 'algebr4.debug.js',
     library: 'algebr4'
   }

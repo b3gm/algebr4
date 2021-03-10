@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES6",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist/es6",
+    "outDir": "dist/commonjs",
     "declaration": true,
-    "typeRoots": ["node_modules/@types"],
-    "esModuleInterop": true
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": [
     "node_modules/**",
