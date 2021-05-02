@@ -3,6 +3,9 @@ import { WMat4 } from './WMat4';
 import { LVec4 } from './LVec4';
 import { Vec4 } from './Vec4';
 
+/**
+ * Implementation class for 4 dimensional matrices.
+ */
 export class Mat4 implements WMat4 {
 
     public static fromLiteral(m: LMat4): Mat4 {
@@ -227,7 +230,11 @@ export class Mat4 implements WMat4 {
             t2 = yz * (zw * wx - ww * zx) + yw * (zx * wz - wx * zz) + yx * (zz * ww - wz * zw),
             t3 = yw * (zx * wy - wx * zy) + yx * (zy * ww - wy * zw) + yy * (zw * wx - ww * zx),
             t4 = yx * (zy * wz - wy * zz) + yy * (zz * wx - wz * zx) + yz * (zx * wy - wx * zy);
-        const detInv = 1 / (xx * t1 - xy * t2 + xz * t3 - xw * t4);
+        const det = (xx * t1 - xy * t2 + xz * t3 - xw * t4);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
 
         return new Mat4(
             detInv * t1,
@@ -258,7 +265,11 @@ export class Mat4 implements WMat4 {
             t2 = yz * (zw * wx - ww * zx) + yw * (zx * wz - wx * zz) + yx * (zz * ww - wz * zw),
             t3 = yw * (zx * wy - wx * zy) + yx * (zy * ww - wy * zw) + yy * (zw * wx - ww * zx),
             t4 = yx * (zy * wz - wy * zz) + yy * (zz * wx - wz * zx) + yz * (zx * wy - wx * zy);
-        const detInv = 1 / (xx * t1 - xy * t2 + xz * t3 - xw * t4);
+        const det = (xx * t1 - xy * t2 + xz * t3 - xw * t4);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
 
         this.xx = detInv * t1,
             this.xy = - detInv * (xy * (zz * ww - wz * zw) + xz * (zw * wy - ww * zy) + xw * (zy * wz - wy * zz)),
@@ -334,6 +345,26 @@ export class Mat4 implements WMat4 {
             this.zx, this.zy, this.zz, this.zw,
             this.wx, this.wy, this.wz, this.ww
         );
+    }
+
+    assignFrom(m: LMat4): Mat4 {
+        this.xx = m.xx;
+        this.xy = m.xy;
+        this.xz = m.xz;
+        this.xw = m.xw;
+        this.yx = m.yx;
+        this.yy = m.yy;
+        this.yz = m.yz;
+        this.yw = m.yw;
+        this.zx = m.zx;
+        this.zy = m.zy;
+        this.zz = m.zz;
+        this.zw = m.zw;
+        this.wx = m.wx;
+        this.wy = m.wy;
+        this.wz = m.wz;
+        this.ww = m.ww;
+        return this;
     }
 
     equals(o: LMat4, tolerance: number = 0): boolean {

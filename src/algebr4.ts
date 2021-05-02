@@ -22,9 +22,10 @@ export { WMat3 } from './WMat3';
 export { WMat4 } from './WMat4';
 export { WQuaternion } from './WQuaternion';
 
-export { Vec2 } from './Vec2';
-export { Vec3 } from './Vec3';
-export { Vec4 } from './Vec4';
+export { PI, PI2, PI_HALF, DEG2RAD, RAD2DEG } from './constants';
+export { Vec2, o2, ux2, uy2 } from './Vec2';
+export { Vec3, o3, ux3, uy3, uz3 } from './Vec3';
+export { Vec4, o4, ux4, uy4, uz4, uw4 } from './Vec4';
 export { Mat2 } from './Mat2';
 export { Mat3 } from './Mat3';
 export { Mat4 } from './Mat4';

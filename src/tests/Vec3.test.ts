@@ -190,6 +190,13 @@ describe(Vec3, () => {
         expect(new Vec3(-1, 0, 0).angle(new Vec3(1, -0.1, 0)))
             .toBeCloseTo(Math.PI * 0.968275, 5);
     });
+
+    it('should assign to itself from another vector', () => {
+        const a = testVec();
+        const b = testVec2();
+        b.assignFrom(a);
+        expect(b).toEqual(a);
+    });
 });
 
 expect.extend({

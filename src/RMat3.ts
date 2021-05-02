@@ -2,6 +2,10 @@ import { LMat3 } from './LMat3';
 import { LVec3 } from './LVec3';
 import { RVec3 } from './RVec3';
 
+/**
+ * Interface for readable 3 dimensional matrices. Methods do not change the
+ * internal state of the object, but rather return a new RMat3 object.
+ */
 export interface RMat3 extends LMat3 {
 
     toFlatArray(): Array<number>;

@@ -1,5 +1,9 @@
 import { LVec3 } from './LVec3';
 
+/**
+ * Interface for readable 3 dimensional vectors. Methods do not change the
+ * internal state of the object, but rather return a new RVec3 object.
+ */
 export interface RVec3 extends LVec3 {
 
     dot(vec: LVec3): number;

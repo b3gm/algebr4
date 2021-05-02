@@ -2,6 +2,10 @@ import { LMat4 } from './LMat4';
 import { LVec4 } from './LVec4';
 import { RVec4 } from './RVec4';
 
+/**
+ * Interface for readable 4 dimensional matrices. Methods do not change the
+ * internal state of the object, but rather return a new RMat4 object.
+ */
 export interface RMat4 extends LMat4 {
 
     toFlatArray(): Array<number>;

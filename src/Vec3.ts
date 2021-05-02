@@ -2,6 +2,9 @@ import { LVec3 } from './LVec3';
 import { WVec3 } from './WVec3';
 import { DEG2RAD } from './constants';
 
+/**
+ * Implementation class for 3 dimensional vectors.
+ */
 export class Vec3 implements WVec3 {
 
     public static fromLiteral(vec: LVec3): Vec3 {
@@ -183,6 +186,13 @@ export class Vec3 implements WVec3 {
         );
     }
 
+    public assignFrom(vec: LVec3): Vec3 {
+        this.x = vec.x;
+        this.y = vec.y;
+        this.z = vec.z;
+        return this;
+    }
+
     public copy(): Vec3 {
         return new Vec3(this.x, this.y, this.z);
     }
@@ -200,6 +210,6 @@ export class Vec3 implements WVec3 {
 }
 
 export const o3 = Object.freeze(new Vec3(0, 0, 0));
-export const ex3 = Object.freeze(new Vec3(1, 0, 0));
-export const ey3 = Object.freeze(new Vec3(0, 1, 0));
-export const ez3 = Object.freeze(new Vec3(0, 0, 1));
+export const ux3 = Object.freeze(new Vec3(1, 0, 0));
+export const uy3 = Object.freeze(new Vec3(0, 1, 0));
+export const uz3 = Object.freeze(new Vec3(0, 0, 1));

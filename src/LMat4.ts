@@ -1,3 +1,6 @@
+/**
+ * Base interface for 4 dimensional matrices.
+ */
 export interface LMat4 {
     readonly xx: number;
     readonly xy: number;

@@ -1,6 +1,12 @@
 import { RVec2 } from './RVec2';
 import { LVec2 } from './LVec2';
 
+/**
+ * Interface for writable 2 dimensional vectors. Methods from
+ * RVec2 are redefined, to return writable objects. Additional
+ * methods are provided, that change the internal state of the object instead
+ * of returning a new one.
+ */
 export interface WVec2 extends RVec2 {
 
     // overrides
@@ -16,6 +22,7 @@ export interface WVec2 extends RVec2 {
     copy(): WVec2;
 
     // new methods
+    assignFrom(vec: LVec2): WVec2;
     addSelf(vec: LVec2): WVec2;
     subtractSelf(vec: LVec2): WVec2;
     scalarMultiplySelf(factor: number): WVec2;

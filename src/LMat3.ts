@@ -1,3 +1,6 @@
+/**
+ * Base interface for 3 dimensional matrices.
+ */
 export interface LMat3 {
     readonly xx: number;
     readonly xy: number;

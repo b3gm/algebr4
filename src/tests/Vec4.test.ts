@@ -125,4 +125,11 @@ describe(Vec4, () => {
     it('should import literals', () => {
         expect(Vec4.fromLiteral(testVec())).toMatchObject(testVec());
     });
+
+    it('should assign to itself from another vector', () => {
+        const a = testVec();
+        const b = testVec2();
+        b.assignFrom(a);
+        expect(b).toEqual(a);
+    });
 });

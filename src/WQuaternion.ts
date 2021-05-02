@@ -3,6 +3,11 @@ import { LQuaternion } from './LQuaternion';
 import { WVec3 } from './WVec3';
 import { LVec3 } from './LVec3';
 
+/**
+ * Interface for writable quaternions. Methods from RQuaternion are
+ * redefined, to return writable objects. Additional methods are provided,
+ * that change the internal state of the object instead of returning a new one.
+ */
 export interface WQuaternion extends RQuaternion {
 
     // overrides
@@ -21,6 +26,7 @@ export interface WQuaternion extends RQuaternion {
     copy(): WQuaternion;
 
     // new methods
+    assignFrom(q: LQuaternion): WQuaternion;
     addSelf(q: LQuaternion): WQuaternion;
     subtractSelf(q: LQuaternion): WQuaternion;
     scalarMultiplySelf(f: number): WQuaternion;

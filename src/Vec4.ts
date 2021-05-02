@@ -1,6 +1,9 @@
 import { LVec4 } from './LVec4';
 import { WVec4 } from './WVec4';
 
+/**
+ * Implementation class for 4 dimensional vectors.
+ */
 export class Vec4 implements WVec4 {
 
     public static fromLiteral(vec: LVec4): Vec4 {
@@ -117,6 +120,14 @@ export class Vec4 implements WVec4 {
         return new Vec4(this.x, this.y, this.z, this.w);
     }
 
+    public assignFrom(vec: LVec4): Vec4 {
+        this.x = vec.x;
+        this.y = vec.y;
+        this.z = vec.z;
+        this.w = vec.w;
+        return this;
+    }
+
     public toArray(): Array<number> {
         return [this.x, this.y, this.z, this.w];
     }
@@ -130,3 +141,9 @@ export class Vec4 implements WVec4 {
     }
 
 }
+
+export const o4 = Object.freeze(new Vec4(0, 0, 0, 0));
+export const ux4 = Object.freeze(new Vec4(1, 0, 0, 0));
+export const uy4 = Object.freeze(new Vec4(0, 1, 0, 0));
+export const uz4 = Object.freeze(new Vec4(0, 0, 1, 0));
+export const uw4 = Object.freeze(new Vec4(0, 0, 0, 1));

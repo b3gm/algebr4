@@ -3,6 +3,11 @@ import { RMat3 } from './RMat3';
 import { LVec3 } from './LVec3';
 import { WVec3 } from './WVec3';
 
+/**
+ * Interface for writable 3 dimensional matrices. Methods from RMat3 are
+ * redefined, to return writable objects. Additional methods are provided,
+ * that change the internal state of the object instead of returning a new one.
+ */
 export interface WMat3 extends RMat3 {
 
     // overrides
@@ -27,6 +32,7 @@ export interface WMat3 extends RMat3 {
     copy(): WMat3;
 
     // new methods
+    assignFrom(m: LMat3): WMat3;
     addSelf(m: LMat3): WMat3;
     subtractSelf(m: LMat3): WMat3;
     scalarMultiplySelf(f: number): WMat3;

@@ -8,6 +8,9 @@ const cos = Math.cos;
 const sin = Math.sin;
 const sqrt = Math.sqrt;
 
+/**
+ * Implementation class for quaternions.
+ */
 export class Quaternion implements WQuaternion {
 
     public static fromFlatArray(a: Array<number>): Quaternion {
@@ -203,6 +206,14 @@ export class Quaternion implements WQuaternion {
             this.y,
             this.z
         );
+    }
+
+    public assignFrom(q: LQuaternion): Quaternion {
+        this.w = q.w;
+        this.x = q.x;
+        this.y = q.y;
+        this.z = q.z;
+        return this;
     }
 
 }

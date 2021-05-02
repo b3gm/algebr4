@@ -1,5 +1,9 @@
 import { LVec2 } from './LVec2';
 
+/**
+ * Interface for readable 2 dimensional vectors. Methods do not change the
+ * internal state of the object, but rather return a new RVec2 object.
+ */
 export interface RVec2 extends LVec2 {
 
     dot(vec: LVec2): number;

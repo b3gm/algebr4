@@ -35,6 +35,14 @@ export function rowTimesColumn4(): Mat4 {
     );
 }
 
+export function rowTimesColumn3(): Mat3 {
+    return new Mat3(
+        1, 2, 3,
+        2, 4, 6,
+        3, 6, 9
+    );
+}
+
 export function rowTimesColumn2(): Mat2 {
     return new Mat2(
         1, 2,

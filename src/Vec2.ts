@@ -2,6 +2,9 @@ import { LVec2 } from './LVec2';
 import { WVec2 } from './WVec2';
 import { DEG2RAD } from './constants';
 
+/**
+ * Implementation class for 2 dimensional vectors.
+ */
 export class Vec2 implements WVec2 {
 
     public static fromLiteral(vec: LVec2): Vec2 {
@@ -123,6 +126,12 @@ export class Vec2 implements WVec2 {
         return new Vec2(this.x, this.y);
     }
 
+    public assignFrom(vec: LVec2): Vec2 {
+        this.x = vec.x;
+        this.y = vec.y;
+        return this;
+    }
+
     public toArray(): Array<number> {
         return [this.x, this.y];
     }
@@ -134,5 +143,5 @@ export class Vec2 implements WVec2 {
 }
 
 export const o2 = Object.freeze(new Vec2(0, 0));
-export const ex2 = Object.freeze(new Vec2(1, 0));
-export const ey2 = Object.freeze(new Vec2(0, 1));
+export const ux2 = Object.freeze(new Vec2(1, 0));
+export const uy2 = Object.freeze(new Vec2(0, 1));

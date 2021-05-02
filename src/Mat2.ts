@@ -3,6 +3,9 @@ import { WMat2 } from './WMat2';
 import { LVec2 } from './LVec2';
 import { Vec2 } from './Vec2';
 
+/**
+ * Implementation class for 2 dimensional matrices.
+ */
 export class Mat2 implements WMat2 {
 
     public static fromLiteral(m: LMat2): Mat2 {
@@ -124,7 +127,11 @@ export class Mat2 implements WMat2 {
     invert(): Mat2 {
         const xx = this.xx, xy = this.xy,
             yx = this.yx, yy = this.yy;
-        const detInv = 1 / (xx * yy - xy * yx);
+        const det = (xx * yy - xy * yx);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
 
         return new Mat2(
             detInv * yy, - detInv * xy,
@@ -135,7 +142,11 @@ export class Mat2 implements WMat2 {
     invertSelf(): Mat2 {
         const xx = this.xx, xy = this.xy,
             yx = this.yx, yy = this.yy;
-        const detInv = 1 / (xx * yy - xy * yx);
+        const det = (xx * yy - xy * yx);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
         this.xx = detInv * yy;
         this.xy = - detInv * xy;
         this.yx = - detInv * yx;
@@ -178,6 +189,14 @@ export class Mat2 implements WMat2 {
             this.xx, this.xy,
             this.yx, this.yy
         );
+    }
+
+    assignFrom(m: LMat2): Mat2 {
+        this.xx = m.xx;
+        this.xy = m.xy;
+        this.yx = m.yx;
+        this.yy = m.yy;
+        return this;
     }
 
     equals(o: Mat2, tolerance: number = 0): boolean {

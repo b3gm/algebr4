@@ -1,5 +1,9 @@
 import { LVec4 } from './LVec4';
 
+/**
+ * Interface for readable 4 dimensional vectors. Methods do not change the
+ * internal state of the object, but rather return a new RVec4 object.
+ */
 export interface RVec4 {
 
     x: number;

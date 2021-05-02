@@ -35,6 +35,37 @@ describe('Mat2', () => {
         }
     });
 
+    it('should throw if not invertible', () => {
+        let err: any = null;
+        const mat: Mat2 = new Mat2(0, 0, 0, 1);
+        try {
+            mat.invert();
+        } catch(e) {
+            err = e;
+        }
+        expect(err).not.toBeNull();
+        expect(err.message).toBe('Matrix cannot be inverted.');
+    });
+
+    it('should throw if not invertible on invertSelf', () => {
+        let err: any = null;
+        const mat: Mat2 = new Mat2(0, 0, 0, 1);
+        try {
+            mat.invertSelf();
+        } catch(e) {
+            err = e;
+        }
+        expect(err).not.toBeNull();
+        expect(err.message).toBe('Matrix cannot be inverted.');
+    });
+
+    it('should assign to itself from another matrix', () => {
+        const a = c.testMat2();
+        const b = c.rowTimesColumn2();
+        b.assignFrom(a);
+        expect(b).toEqual(a);
+    });
+
     it('should correctly add matrices', () => {
         const a = c.incrementing2();
         const b = c.rowTimesColumn4();

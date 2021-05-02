@@ -6,6 +6,9 @@ import { Vec3 } from './Vec3';
 const sin = Math.sin;
 const cos = Math.cos;
 
+/**
+ * Implementation class for 3 dimensional matrices.
+ */
 export class Mat3 implements WMat3 {
 
     public static fromLiteral(m: LMat3): Mat3 {
@@ -194,7 +197,11 @@ export class Mat3 implements WMat3 {
             t1 = yy * zz - zy * yz,
             t2 = yx * zz - zx * yz,
             t3 = yx * zy - zx * yy;
-        const detInv = 1 / (xx * t1 - xy * t2 + xz * t3);
+        const det = (xx * t1 - xy * t2 + xz * t3);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
 
         return new Mat3(
             detInv * t1,
@@ -216,7 +223,11 @@ export class Mat3 implements WMat3 {
             t1 = yy * zz - zy * yz,
             t2 = yx * zz - zx * yz,
             t3 = yx * zy - zx * yy;
-        const detInv = 1 / (xx * t1 - xy * t2 + xz * t3);
+        const det = (xx * t1 - xy * t2 + xz * t3);
+        if (det === 0) {
+            throw new Error('Matrix cannot be inverted.');
+        }
+        const detInv = 1 / det;
 
         this.xx = detInv * t1;
         this.xy = - detInv * (xy * zz - zy * xz);
@@ -273,6 +284,19 @@ export class Mat3 implements WMat3 {
             this.yx, this.yy, this.yz,
             this.zx, this.zy, this.zz
         );
+    }
+
+    assignFrom(m: LMat3): Mat3 {
+        this.xx = m.xx;
+        this.xy = m.xy;
+        this.xz = m.xz;
+        this.yx = m.yx;
+        this.yy = m.yy;
+        this.yz = m.yz;
+        this.zx = m.zx;
+        this.zy = m.zy;
+        this.zz = m.zz;
+        return this;
     }
 
     equals(o: Mat3, tolerance: number = 0): boolean {

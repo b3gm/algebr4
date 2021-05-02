@@ -115,6 +115,13 @@ describe(Quaternion, () => {
         expect(c)['equals'](testQ());
     });
 
+    it('should assign to itself from another quaternion', () => {
+        const a = testQ();
+        const b = testQ2();
+        b.assignFrom(a);
+        expect(b).toEqual(a);
+    });
+
     it('should correctly rotate a vector', () => {
         const v: RVec3 = new Vec3(0, 1, 0);
         const q = Quaternion.fromAngleAxisUnsafe(
