@@ -56,7 +56,7 @@ export class Mat3 implements WMat3 {
             cosA + uy * uy * oneMcosA,
             uy * uz * oneMcosA - ux * sinA,
             uz * ux * oneMcosA - uy * sinA,
-            uz * uy * oneMcosA - ux * sinA,
+            uz * uy * oneMcosA + ux * sinA,
             cosA + uz * uz * oneMcosA
         );
     }
