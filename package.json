@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/b3gm/algebr4#readme",
   "devDependencies": {
-    "@types/jest": "^27.4.0",
-    "@types/node": "^12.19.4",
+    "@types/jest": "^27.1.0",
+    "@types/node": "^16.11.0",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "eslint": "^8.14.0",
