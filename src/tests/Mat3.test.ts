@@ -316,8 +316,8 @@ describe('Mat3', () => {
 expect.extend({
     equals: (received: Mat3, expected: Mat3) => {
         let matches = true;
-        for (const k in ['xx', 'xy', 'xz', 'yx', 'yy', 'yz', 'zx', 'zy', 'zz']) {
-            matches = matches && (received[k] === expected[k]);
+        for (const k of ['xx', 'xy', 'xz', 'yx', 'yy', 'yz', 'zx', 'zy', 'zz']) {
+            matches = matches && (Math.abs(received[k] - expected[k]) < TOL);
         }
 
         return {
