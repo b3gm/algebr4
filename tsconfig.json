@@ -4,7 +4,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "sourceMap": false
   },
   "exclude": [
     "node_modules/**",

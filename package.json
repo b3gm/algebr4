@@ -6,9 +6,8 @@
   "types": "dist/es6/algebr4.d.ts",
   "scripts": {
     "test": "npx jest",
-    "build": "npm run build:module && npm run build:debug && npm run build:prod && npm run build:commonjs",
+    "build": "npm run build:module && npm run build:prod && npm run build:commonjs",
     "build:prod": "webpack",
-    "build:debug": "webpack -c webpack.debug.js",
     "build:module": "npx tsc -p tsconfig.module.json",
     "build:commonjs": "npx tsc -p tsconfig.commonjs.json",
     "lint": "npx eslint . --ext .ts",

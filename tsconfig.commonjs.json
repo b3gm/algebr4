@@ -5,7 +5,6 @@
     "moduleResolution": "node",
     "outDir": "dist/commonjs",
     "declaration": true,
-    "sourceMap": true,
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": [
