@@ -1,4 +1,5 @@
 import { LVec4 } from './LVec4';
+import { RVec4 } from './RVec4';
 import { WVec4 } from './WVec4';
 
 /**
@@ -142,8 +143,8 @@ export class Vec4 implements WVec4 {
 
 }
 
-export const o4 = Object.freeze(new Vec4(0, 0, 0, 0));
-export const ux4 = Object.freeze(new Vec4(1, 0, 0, 0));
-export const uy4 = Object.freeze(new Vec4(0, 1, 0, 0));
-export const uz4 = Object.freeze(new Vec4(0, 0, 1, 0));
-export const uw4 = Object.freeze(new Vec4(0, 0, 0, 1));
+export const o4: RVec4 = Object.freeze(new Vec4(0, 0, 0, 0));
+export const ux4: RVec4 = Object.freeze(new Vec4(1, 0, 0, 0));
+export const uy4: RVec4 = Object.freeze(new Vec4(0, 1, 0, 0));
+export const uz4: RVec4 = Object.freeze(new Vec4(0, 0, 1, 0));
+export const uw4: RVec4 = Object.freeze(new Vec4(0, 0, 0, 1));

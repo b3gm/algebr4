@@ -1,6 +1,7 @@
 import { LVec2 } from './LVec2';
 import { WVec2 } from './WVec2';
 import { DEG2RAD } from './constants';
+import { RVec2 } from './RVec2';
 
 /**
  * Implementation class for 2 dimensional vectors.
@@ -142,6 +143,6 @@ export class Vec2 implements WVec2 {
     }
 }
 
-export const o2 = Object.freeze(new Vec2(0, 0));
-export const ux2 = Object.freeze(new Vec2(1, 0));
-export const uy2 = Object.freeze(new Vec2(0, 1));
+export const o2: RVec2 = Object.freeze(new Vec2(0, 0));
+export const ux2: RVec2 = Object.freeze(new Vec2(1, 0));
+export const uy2: RVec2 = Object.freeze(new Vec2(0, 1));

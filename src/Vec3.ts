@@ -1,6 +1,7 @@
 import { LVec3 } from './LVec3';
 import { WVec3 } from './WVec3';
 import { DEG2RAD } from './constants';
+import { RVec3 } from './RVec3';
 
 /**
  * Implementation class for 3 dimensional vectors.
@@ -209,7 +210,7 @@ export class Vec3 implements WVec3 {
     }
 }
 
-export const o3 = Object.freeze(new Vec3(0, 0, 0));
-export const ux3 = Object.freeze(new Vec3(1, 0, 0));
-export const uy3 = Object.freeze(new Vec3(0, 1, 0));
-export const uz3 = Object.freeze(new Vec3(0, 0, 1));
+export const o3: RVec3 = Object.freeze(new Vec3(0, 0, 0));
+export const ux3: RVec3 = Object.freeze(new Vec3(1, 0, 0));
+export const uy3: RVec3 = Object.freeze(new Vec3(0, 1, 0));
+export const uz3: RVec3 = Object.freeze(new Vec3(0, 0, 1));
